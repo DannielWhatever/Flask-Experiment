@@ -5,20 +5,51 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <div class="row">
+    <div class="row" style="padding-top:10%;"> <!--container-->
         <div class="col-xs-6 col-xs-offset-3">
-            <div class="panel panel-default">
-                <div class="panel-header">Login</div>
-                <div class="panel-body">
-                    <form>
-                        <input type="text" class="form-control" name="user" placeholder="Username">
-                        <input type="text" class="form-control" name="passwd" placeholder="Password">
-                        <button type="submit" class="btn btn-success">Login</button>
-                    </form>
-
-                </div>
+            
+            <!-- Alert Message --> <!-- este alert debe ir en un if de jinja-chan kawaii desu (asi funcionará) qué clase de brujeria es esta!! -->
+            {% if error %}
+            <div class="alert alert-warning alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert">
+                  <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+              </button>
+              Sorry, you're not kawaii enough to login! :/.
+              <!--  Lo sentimos, el usuario no es valido. -->
             </div>
+            {% endif %}
+            
+            <!-- Login Panel -->
+            <div class="panel panel-primary">
+                <div class="panel-heading">Login</div>
+                
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-8 col-xs-offset-2">
+                            <form method="post">
+                                <br>
+                                <div class="row">
+                                    <input type="text" class="form-control" name="user" placeholder="Username">
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <input type="text" class="form-control" name="passwd" placeholder="Password">
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <button type="submit" class="btn btn-success">Login</button>
+                                </div>
+                                <br>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
+            </div><!-- fin panel login -->
+            
+            
         </div>
-    </div>
+    </div><!-- fin container principal-->
+    
 </body>
 </html>

@@ -1,16 +1,25 @@
 from flask import Flask
-from flask import render_template
-# El constructor es Flask :3
+from flask import render_template, request
+
 app = Flask(__name__)
 
-@app.route("/") # es un decorador. La aplicacion está escuchando la la url "/"
-def index():
-	return render_template('/login.html')
 
-@app.route("/hello") # es un decorador. La aplicacion está escuchando la la url "/"
-@app.route("/hello/<name>") # una funcion atiende a dos url :OOOO!!!!
-def hello(name=None): # el atributo por defecto es nulo, por lo que se puede invocar la funcion sin la variabla :3 
-					  # (por eso se puede hacer lo de mas arriba)
+@app.route("/", methods=['GET', 'POST'])
+def index(user=None, passwd=None): # podriamos separar cada if... if (POST){ if(user and paass}, else dale ;D
+	try: # 
+		if(request.method=='POST'):
+			if (request.form['user']=='leo' and request.form['passwd'] == '1313'): # user and pass validos
+				return render_template('/hello.html',name=request.form['user'])
+			else: # error en usuario y pass
+				return render_template('/login.html',error='Usuario invalido')		
+		else: # error en method , técnicamente no es un error este
+			return render_template('/login.html') 
+	except: 
+		return render_template('/login.html',error='Error wtf-chan en un try XD')
+
+@app.route("/hello")
+@app.route("/hello/<name>")
+def hello(name=None):
 	return render_template('/hello.html', name=name)
 
 @app.route('/user/<username>')
@@ -20,8 +29,10 @@ def show_user_profile(username):
 @app.route('/post/<int:post_id>')
 def show_post(post_id):
 	return "Post %d" % (post_id)
+	
+@app.route('/test')
+def test():
+	return str(request.form)
 
 if __name__ == "__main__":
-	# Î  Esto se ejecutará SSI es el archivo principal el que se usa
-	# Si importamos esto en otro archivo esta linea no se va a ejecutar.
-	app.run(debug=True) # constructor de Flask, es como instanciar en java :3, app es una instancia de la clase Flask y uno de los métodos es run().
+	app.run(debug=True)

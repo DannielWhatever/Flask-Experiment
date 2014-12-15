@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route("/") # es un decorador. La aplicacion está escuchando la la url "/"
 def index():
-	return "HOME :3"
+	return render_template('/login.html')
 
 @app.route("/hello") # es un decorador. La aplicacion está escuchando la la url "/"
 @app.route("/hello/<name>") # una funcion atiende a dos url :OOOO!!!!

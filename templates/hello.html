@@ -4,8 +4,11 @@
 	<title>Jinja2 Templates! </title>
 </head>
 <body>
-	{% if name %}
-		<p>Hi {{ name }}, sure you are so kawaii desu *-*</p>
+	{% if user %}
+		<h2>Hi {{ user[0] }} *-*</h2>
+
+        <p><i> {{ user[2] }} </i></p> <!-- cambiable :B -->
+
 	{% else %}
 		<h1> {{ error }}</h1>
 	{% endif %}
